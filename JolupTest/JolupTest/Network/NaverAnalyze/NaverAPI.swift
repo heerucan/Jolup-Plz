@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum NaverAPI {
-    case analyze(text: String)
+    case analyze(text: NaverRequest)
 }
 
 extension NaverAPI: TargetType {
@@ -36,17 +36,15 @@ extension NaverAPI: TargetType {
     var task: Task {
         switch self {
         case let .analyze(text):
-            let requestBody: [String: Any] = ["query": text, "lang": "ko"]
-            let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-            return .requestJSONEncodable(jsonData)
+            return .requestJSONEncodable(text)
         }
     }
     
     var headers: [String: String]? {
         return [
             "Content-Type": "application/json",
-            "X-NCP-APIGW-API-KEY-ID": "iue14drrce",
-            "X-NCP-APIGW-API-KEY": "pCI2ICYrruqUZxD9kWo3UrkBDYxzmaywqVao8jo4"
+            "X-NCP-APIGW-API-KEY-ID": "CLIENT_ID",
+            "X-NCP-APIGW-API-KEY": "SECRET_KEY"
         ]
     }
 }

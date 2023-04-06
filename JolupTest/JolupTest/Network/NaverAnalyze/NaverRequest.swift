@@ -7,7 +7,6 @@
 
 import Foundation
 
-struct NaverRequest: Encodable {
-    let query: String
-    let lang: String = "ko"
+struct NaverRequest: Codable {
+    let content: String
 }
